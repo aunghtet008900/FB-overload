@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # coding: utf-8
+# copyright: DulLah
 
 import os
 import sys
@@ -55,7 +56,7 @@ def over(link):
 	a = s.get(link)
 	bs = BS(a.content,"html.parser")
 	for i in bs("form"):
-		if "/profile/edit/info/save/fieldwithtextanddropdown/?" in i["action"]: 
+		if "post" in i["method"]:
 			data.append(i["action"])
 	for i in bs("input"):
 		try:
@@ -77,6 +78,8 @@ def over(link):
 	if b.status_code==200:
 		print "%s[*]%s done .."%(H,P)
 		exit("%s[*]%s silahkan cek profile anda"%(H,P))
+	else:
+		exit("%s[!] gagal coba lagi"%(M))
 		
 if __name__ == "__main__":
 	os.system("clear")
